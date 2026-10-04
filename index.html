@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Mysterious Letter 🕯️</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+font-family:Georgia,serif;
+background:radial-gradient(circle,#35283d,#09070d);
+color:#eee;
+}
+
+.card{
+width:100%;
+max-width:430px;
+text-align:center;
+background:rgba(22,18,28,.94);
+border:1px solid #66566f;
+border-radius:25px;
+padding:28px 20px;
+box-shadow:0 0 35px #000;
+}
+
+.emoji{font-size:65px}
+
+h1{font-size:27px}
+
+p{
+line-height:1.7;
+font-size:16px;
+}
+
+.message{
+background:#f3e9d8;
+color:#29202b;
+border-radius:8px;
+padding:22px 18px;
+margin:20px 0;
+line-height:1.8;
+box-shadow:0 8px 25px #0008;
+}
+
+button{
+border:0;
+border-radius:22px;
+padding:13px 18px;
+margin:7px;
+background:#d8b7d9;
+color:#211925;
+font-size:15px;
+cursor:pointer;
+}
+
+.option{
+display:block;
+width:100%;
+background:#211b29;
+color:#eee;
+border:1px solid #66566f;
+}
+
+.small{
+font-size:12px;
+opacity:.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="app"></div>
+
+<script>
+
+const app=document.getElementById("app");
+
+let first="";
+let second="";
+
+function start(){
+app.innerHTML=`
+<div class="emoji">✉️</div>
+
+<h1>You have a letter.</h1>
+
+<p>There is no name on it.</p>
+<p>There is no address either.</p>
+
+<button onclick="letter()">Open it 🕯️</button>
+
+<p class="small">You probably shouldn't.</p>
+`;
+}
+
+function letter(){
+app.innerHTML=`
+<div class="emoji">💌</div>
+
+<div class="message">
+Dear stranger,<br><br>
+
+If you're reading this,<br>
+then you found the page.<br><br>
+
+I wrote this letter yesterday.<br>
+The strange part?<br><br>
+
+<b>I don't remember writing it.</b> 👁️
+</div>
+
+<button onclick="game()">Continue →</button>
+`;
+}
+
+function game(){
+app.innerHTML=`
+<div class="emoji">🎮</div>
+
+<h1>One little game.</h1>
+
+<p>Choose the object you would take with you.</p>
+
+<button class="option" onclick="firstChoice('key')">
+🗝️ The old key
+</button>
+
+<button class="option" onclick="firstChoice('bear')">
+🧸 The little teddy
+</button>
+
+<button class="option" onclick="firstChoice('candle')">
+🕯️ The candle
+</button>
+`;
+}
+
+function firstChoice(x){
+first=x;
+
+app.innerHTML=`
+<div class="emoji">👁️</div>
+
+<h1>You hear something.</h1>
+
+<p>It's coming from behind a closed door.</p>
+
+<p><b>What do you do?</b></p>
+
+<button class="option" onclick="secondChoice('open')">
+🚪 Open the door
+</button>
+
+<button class="option" onclick="secondChoice('quiet')">
+🫣 Stay completely quiet
+</button>
+
+<button class="option" onclick="secondChoice('turn')">
+🕯️ Turn around
+</button>
+`;
+}
+
+function secondChoice(x){
+second=x;
+result();
+}
+
+function result(){
+
+let title="";
+let text="";
+
+if(first=="key" && second=="open"){
+title="🗝️ The Seeker";
+text="You are curious enough to open doors you probably shouldn't. You want answers, even when the answers are strange.";
+}
+
+else if(first=="bear" && second=="quiet"){
+title="🧸 The Soft Ghost";
+text="You seem sweet and harmless... but you're surprisingly good at noticing when something feels wrong.";
+}
+
+else if(first=="candle" && second=="turn"){
+title="🕯️ The Watcher";
+text="You don't rush toward the mystery. You observe first. Honestly, that's probably the smartest choice here.";
+}
+
+else if(first=="key"){
+title="🌙 The Dreamer";
+text="You follow curiosity wherever it takes you. Reality is interesting, but mysteries are better.";
+}
+
+else if(first=="bear"){
+title="🎀 The Unexplained";
+text="Cute on the outside. Slightly mysterious on the inside. Nobody is quite sure what goes on in your head.";
+}
+
+else{
+title="👁️ The Midnight Soul";
+text="You notice little things other people ignore. You probably would have found this letter eventually anyway.";
+}
+
+app.innerHTML=`
+<div class="emoji">🔮</div>
+
+<h1>${title}</h1>
+
+<div class="message">
+${text}
+</div>
+
+<p>✦ Your result has been recorded. ✦</p>
+
+<p class="small">
+Thank you for playing.
+</p>
+
+<p>
+Wait...
+</p>
+
+<p><b>You chose the same thing they chose.</b> 👁️</p>
+
+<button onclick="start()">↻ Play again</button>
+`;
+}
+
+start();
+
+</script>
+
+</body>
+</html>
